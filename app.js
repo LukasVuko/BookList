@@ -42,7 +42,13 @@ UI.prototype.showAlert = function(msg, className) {
   }, 2000);
 };
 
-// Event listeners
+UI.prototype.deleteBook = function(target) {
+  if (target.className === 'delete') {
+    target.parentElement.parentElement.remove();
+  }
+};
+
+// Event listener for add book
 
 document.getElementById('book-form').addEventListener('submit', addBook);
 
@@ -66,3 +72,10 @@ function addBook(e) {
   }
   ui.clearFields();
 }
+
+// Event listener for delete
+document.getElementById('book-list').addEventListener('click', function(e) {
+  const ui = new UI();
+  ui.deleteBook(e.target);
+  ui.showAlert('Book removed!', 'success');
+});
